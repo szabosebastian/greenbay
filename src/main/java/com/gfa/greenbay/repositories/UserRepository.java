@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends CrudRepository<GreenUser, Long> {
 
   GreenUser findByUsername(String username);
+
+  boolean existsGreenUserByUsername(String username);
 }

@@ -13,12 +13,18 @@ public class GreenUser {
   private long id;
   private String username;
   private String password;
+  private long balance;
 
   public GreenUser() {
   }
 
   public GreenUser(String username) {
     this.username = username;
+  }
+
+  public GreenUser(String username, String password) {
+    this.username = username;
+    this.password = password;
   }
 
   public long getId() {
@@ -43,5 +49,13 @@ public class GreenUser {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public long getBalance() {
+    return balance;
+  }
+
+  public void setBalance(long balance) {
+    this.balance = balance;
   }
 }

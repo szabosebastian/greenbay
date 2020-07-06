@@ -14,8 +14,8 @@ public class GreenUserDetails implements UserDetails {
   }
 
   public GreenUserDetails(GreenUser byUsername) {
-    this.username = username;
-    this.password = password;
+    this.username = byUsername.getUsername();
+    this.password = byUsername.getPassword();
   }
 
   @Override
@@ -25,12 +25,12 @@ public class GreenUserDetails implements UserDetails {
 
   @Override
   public String getPassword() {
-    return password;
+    return this.password;
   }
 
   @Override
   public String getUsername() {
-    return username;
+    return this.username;
   }
 
   @Override
