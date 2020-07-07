@@ -1,5 +1,6 @@
 package com.gfa.greenbay.services;
 
+import com.gfa.greenbay.models.ExtendedUserDetails;
 import com.gfa.greenbay.models.GreenUserDetails;
 import com.gfa.greenbay.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class UserPrincipal implements UserDetailsService {
   }
 
   @Override
-  public UserDetails loadUserByUsername(String username) {
+  public ExtendedUserDetails loadUserByUsername(String username) {
     return new GreenUserDetails(userRepository.findByUsername(username));
   }
 }

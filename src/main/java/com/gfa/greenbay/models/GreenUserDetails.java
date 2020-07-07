@@ -5,10 +5,11 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class GreenUserDetails implements UserDetails {
+public class GreenUserDetails implements ExtendedUserDetails {
 
   private String username;
   private String password;
+  private long id;
 
   public GreenUserDetails() {
   }
@@ -16,6 +17,12 @@ public class GreenUserDetails implements UserDetails {
   public GreenUserDetails(GreenUser byUsername) {
     this.username = byUsername.getUsername();
     this.password = byUsername.getPassword();
+    this.id = byUsername.getId();
+  }
+
+  @Override
+  public long getId() {
+    return id;
   }
 
   @Override

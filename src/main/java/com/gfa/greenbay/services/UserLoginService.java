@@ -4,6 +4,7 @@ import com.gfa.greenbay.exceptions.MissingParamsException;
 import com.gfa.greenbay.exceptions.UsernameNotFoundOrInvalidPasswordException;
 import com.gfa.greenbay.models.DTO.LoginRequestDTO;
 import com.gfa.greenbay.models.DTO.LoginResponseDTO;
+import com.gfa.greenbay.models.ExtendedUserDetails;
 import com.gfa.greenbay.models.GreenUser;
 import com.gfa.greenbay.repositories.UserRepository;
 import com.gfa.greenbay.utils.JwtUtil;
@@ -11,7 +12,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -44,7 +44,7 @@ public class UserLoginService {
     } catch (BadCredentialsException e) {
       throw new UsernameNotFoundOrInvalidPasswordException("Password is incorrect.");
     }
-    final UserDetails userDetails = new UserPrincipal(userRepository).loadUserByUsername(loginDTO.getUsername());
+    final ExtendedUserDetails userDetails = new UserPrincipal(userRepository).loadUserByUsername(loginDTO.getUsername());
     GreenUser user = this.userRepository.findByUsername(loginDTO.getUsername());
     LoginResponseDTO successUser = new LoginResponseDTO();
     successUser.setStatus("ok");

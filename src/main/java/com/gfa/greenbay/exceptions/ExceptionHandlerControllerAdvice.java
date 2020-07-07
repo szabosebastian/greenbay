@@ -51,4 +51,52 @@ public class ExceptionHandlerControllerAdvice {
     log.error(exception.getMessage());
     return errorService.defaultExceptionResponse(exception);
   }
+
+  @ExceptionHandler(NotPositiveNumberException.class)
+  @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+  public @ResponseBody
+  ErrorMessageDTO handleNotPositiveNumberException(final Exception exception) {
+    log.error(exception.getMessage());
+    return errorService.defaultExceptionResponse(exception);
+  }
+
+  @ExceptionHandler(InvalidPhotoUrlException.class)
+  @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+  public @ResponseBody
+  ErrorMessageDTO handleInvalidPhotoUrlException(final Exception exception) {
+    log.error(exception.getMessage());
+    return errorService.defaultExceptionResponse(exception);
+  }
+
+  @ExceptionHandler(ItemNotFoundException.class)
+  @ResponseStatus(value = HttpStatus.NOT_FOUND)
+  public @ResponseBody
+  ErrorMessageDTO handleItemNotFoundException(final Exception exception) {
+    log.error(exception.getMessage());
+    return errorService.defaultExceptionResponse(exception);
+  }
+
+  @ExceptionHandler(ItemIsNotSellable.class)
+  @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
+  public @ResponseBody
+  ErrorMessageDTO handleItemIsNotSellable(final Exception exception) {
+    log.error(exception.getMessage());
+    return errorService.defaultExceptionResponse(exception);
+  }
+
+  @ExceptionHandler(NotEnoughMoney.class)
+  @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
+  public @ResponseBody
+  ErrorMessageDTO handleNotEnoughMoney(final Exception exception) {
+    log.error(exception.getMessage());
+    return errorService.defaultExceptionResponse(exception);
+  }
+
+  @ExceptionHandler(BidException.class)
+  @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
+  public @ResponseBody
+  ErrorMessageDTO handleBidException(final Exception exception) {
+    log.error(exception.getMessage());
+    return errorService.defaultExceptionResponse(exception);
+  }
 }

@@ -1,5 +1,6 @@
 package com.gfa.greenbay.utils;
 
+import com.gfa.greenbay.models.ExtendedUserDetails;
 import com.gfa.greenbay.models.GreenUser;
 import com.gfa.greenbay.models.GreenUserDetails;
 import io.jsonwebtoken.Claims;
@@ -38,8 +39,9 @@ public class JwtUtil {
     return extractExpiration(token).before(new Date());
   }
 
-  public String generateToken(UserDetails userDetails) {
+  public String generateToken(ExtendedUserDetails userDetails) {
     Map<String, Object> claims = new HashMap<>();
+    claims.put("id",userDetails.getId());
     return createToken(claims, userDetails.getUsername());
   }
 
