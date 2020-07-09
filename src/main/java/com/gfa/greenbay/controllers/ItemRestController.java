@@ -45,7 +45,7 @@ public class ItemRestController {
     return ResponseEntity.ok().body(this.itemService.infoAboutItem(id));
   }
 
-  @GetMapping("/{id}")
+  @PostMapping("/{id}")
   public ResponseEntity bidToItem(@PathVariable("id") long id, @RequestBody BidDTO bid) throws Exception {
     return ResponseEntity.ok().body(this.itemService.bidToItem(id, bid));
   }

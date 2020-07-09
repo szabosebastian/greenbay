@@ -16,6 +16,7 @@ public class GreenUser {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   private String username;
+  @JsonIgnore
   private String password;
   private long balance;
 

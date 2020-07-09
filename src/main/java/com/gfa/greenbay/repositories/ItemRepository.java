@@ -15,5 +15,5 @@ public interface ItemRepository extends CrudRepository<Items, Long> {
   List<Items> listItemsByPageNumber(int limit, int offset);
 
   @Query(value = "SELECT MAX(bid) FROM Items INNER JOIN Bid ON Items.id = Bid.id", nativeQuery = true)
-  long maxBidOnItem();
+  Long maxBidOnItem();
 }

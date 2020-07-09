@@ -17,8 +17,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-  private UserPrincipal userPrincipal;
-  private JwtRequestFilter jwtRequestFilter;
+  private final UserPrincipal userPrincipal;
+  private final JwtRequestFilter jwtRequestFilter;
 
   @Autowired
   public SecurityConfiguration(UserPrincipal userPrincipal,
@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http.csrf().disable()
         .authorizeRequests()
-        .antMatchers("/register", "/login", "/activation/**").permitAll()
+        .antMatchers("/register", "/login", "/item/list", "/").permitAll()
         .anyRequest().authenticated()
         .and().sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

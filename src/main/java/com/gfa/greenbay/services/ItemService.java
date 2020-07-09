@@ -69,7 +69,7 @@ public class ItemService {
     }
   }
 
-  public Items saveNewItem(ItemDTO itemDTO) {
+  private Items saveNewItem(ItemDTO itemDTO) {
     Items item = new ModelMapper().map(itemDTO, Items.class);
     GreenUser user = userService.findUserByToken();
     List<Items> userItems = user.getOwnedItems();
@@ -95,7 +95,7 @@ public class ItemService {
     return this.itemRepository.findById(id).orElse(null);
   }
 
-  public ItemResponseDTO convertToResponse(Items item) {
+  private ItemResponseDTO convertToResponse(Items item) {
     ItemResponseDTO responseItem = new ModelMapper().map(item, ItemResponseDTO.class);
     List<BidResponseDTO> bidResponseList = new ArrayList<>();
 
@@ -129,17 +129,17 @@ public class ItemService {
     return biddingLogic(item, bid);
   }
 
-  public Object biddingLogic(Items item, BidDTO bidDTO) throws Exception {
+  private Object biddingLogic(Items item, BidDTO bidDTO) throws Exception {
     GreenUser user = userService.findUserByToken();
     Bid bid = new Bid(bidDTO.getBid());
     if (bid.getBid() > user.getBalance()) {
       throw new NotEnoughMoney("Not enough money on the user's account.");
-    } else if (itemRepository.maxBidOnItem() >= bid.getBid()) {
+    } else if (maxBid(item) >= bid.getBid()) {
       throw new BidException("Bid is too low.");
     } else if (bid.getBid() >= item.getPurchasePrice() &&
         user.getBalance() >= bid.getBid()) {
       return buyItem(bid, item, user);
-    } else if (itemRepository.maxBidOnItem() < bid.getBid() &&
+    } else if (maxBid(item) < bid.getBid() &&
         bid.getBid() < item.getPurchasePrice() &&
         user.getBalance() >= bid.getBid()) {
       return takeABid(bid, item, user);
@@ -147,7 +147,14 @@ public class ItemService {
     throw new BidException("Something went wrong in the bidding logic.");
   }
 
-  public Object takeABid(Bid bid, Items item, GreenUser user) {
+  private long maxBid(Items items) {
+    if (itemRepository.maxBidOnItem() == null) {
+      return items.getStartingPrice();
+    }
+    return itemRepository.maxBidOnItem();
+  }
+
+  private Object takeABid(Bid bid, Items item, GreenUser user) {
     bid.setUser(user);
     bid.setItems(item);
 
@@ -166,7 +173,7 @@ public class ItemService {
     return convertToResponse(item);
   }
 
-  public Object buyItem(Bid bid, Items item, GreenUser user) {
+  private Object buyItem(Bid bid, Items item, GreenUser user) {
     item.setSellable(false);
     item.setBuyer(user);
 

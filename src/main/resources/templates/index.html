@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+  <title>GreenBay</title>
+  <meta charset="utf-8"/>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+<body>
+<h1>To make the application work, use POSTMAN!</h1>
+<h2>Endpoints:</h2>
+<h3>/POST</h3>
+<table>
+  <tr>
+    <td>Name:</td>
+    <td>Json required format:</td>
+    <td>Description:</td>
+  </tr>
+  <tr>
+    <td>/register</td>
+    <td>{
+      "username":"username",
+      "password":"password"
+      }</td>
+    <td>Password need to be longer than 8 character.</td>
+  </tr>
+  <tr>
+    <td>/login</td>
+    <td>{
+      "username":"username",
+      "password":"password"
+      }</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>/item/add</td>
+    <td>{
+      "name": "testitem",
+      "description":"testdescription",
+      "photoUrl": "https://test.png",
+      "startingPrice": 20,
+      "purchasePrice": 40
+      }</td>
+    <td>Photo url can be .png .jpg .bmp with http and https.</td>
+  </tr>
+  <tr>
+    <td>/add?balance={value}</td>
+    <td></td>
+    <td>Add money by request param.</td>
+  </tr>
+  <tr>
+    <td>/item/{id}</td>
+    <td>{
+      "bid": 80
+      }</td>
+    <td>Bid to item by id.</td>
+  </tr>
+</table>
+<h3>/GET</h3>
+<table>
+  <tr>
+    <td>Name:</td>
+    <td>Description:</td>
+  </tr>
+  <tr>
+    <td>/item/info/{id}</td>
+    <td>Infos about specific item by id.</td>
+  </tr>
+  <tr>
+    <td>/item/list</td>
+    <td>List first 20 sellable items.</td>
+  </tr>
+  <tr>
+    <td>/item/list/{pageNumber}</td>
+    <td>List 20 sellable items by created date with page path variable.</td>
+  </tr>
+</table>
+</body>
+</html>
